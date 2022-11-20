@@ -21,18 +21,18 @@ class GsmService:
 
     def __init__(self, region='eu-central-1', message_type='TRANSACTIONAL', channel_type='SMS',
                  applicationId=None, aws_access=None, aws_secret=None):
-        self.region = os.environ.get('REGION', region),
-        self.message_type = os.environ.get('PINPOINT_MESSAGE_TYPE', message_type),
-        self.applicationId = os.environ.get('PINPOINT_APPLICATION_ID', applicationId),
+        self.region = os.environ.get('REGION', region)
+        self.message_type = os.environ.get('PINPOINT_MESSAGE_TYPE', message_type)
+        self.applicationId = os.environ.get('PINPOINT_APPLICATION_ID', applicationId)
         if self.applicationId is None:
             raise ValueError(ErrorCodes.APPLICATION_ID_ERROR)
-        self.aws_access_key_id = os.environ.get('AWS_ACCESS', aws_access),
+        self.aws_access_key_id = os.environ.get('AWS_ACCESS', aws_access)
         if self.aws_access_key_id is None:
             raise ValueError(ErrorCodes.AWS_ACCESS_KEY_ERROR)
-        self.aws_secret_access_key = os.environ.get('AWS_SECRET', aws_secret),
+        self.aws_secret_access_key = os.environ.get('AWS_SECRET', aws_secret)
         if self.aws_secret_access_key is None:
             raise ValueError(ErrorCodes.AWS_SECRET_KEY_ERROR)
-        self.channel_type = os.environ.get('CHANNEL_TYPE', channel_type),
+        self.channel_type = os.environ.get('CHANNEL_TYPE', channel_type)
         self.is_sms_send = False
         self.error_message = ErrorCodes.SMS_SEND_ERROR
         self.client = boto3.client('pinpoint', region_name=self.region, aws_access_key_id=self.aws_access_key_id,
