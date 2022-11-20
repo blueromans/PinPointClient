@@ -13,8 +13,8 @@ pip install PinPointClient
 
 ```bash
 REGION: aws region
-MESSAGE_TYPE: message type
-APPLICATION_ID: application id
+PINPOINT_MESSAGE_TYPE: message type
+PINPOINT_APPLICATION_ID: application id
 AWS_ACCESS: aws access key id
 AWS_SECRET: aws secret access key
 CHANNEL_TYPE: channel type

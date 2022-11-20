@@ -22,8 +22,8 @@ class GsmService:
     def __init__(self, region='eu-central-1', message_type='TRANSACTIONAL', channel_type='SMS',
                  applicationId=None, aws_access=None, aws_secret=None):
         self.region = os.environ.get('REGION', region),
-        self.message_type = os.environ.get('MESSAGE_TYPE', message_type),
-        self.applicationId = os.environ.get('APPLICATION_ID', applicationId),
+        self.message_type = os.environ.get('PINPOINT_MESSAGE_TYPE', message_type),
+        self.applicationId = os.environ.get('PINPOINT_APPLICATION_ID', applicationId),
         if self.applicationId is None:
             raise ValueError(ErrorCodes.APPLICATION_ID_ERROR)
         self.aws_access_key_id = os.environ.get('AWS_ACCESS', aws_access),
