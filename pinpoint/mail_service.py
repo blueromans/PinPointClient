@@ -5,7 +5,7 @@ from botocore.exceptions import ClientError
 from pinpoint.exception import PinPointException, ErrorCodes
 
 
-class MailService:
+class EMailService:
     region = "eu-central-1"
     channel_type = "EMAIL"
     applicationId = None
@@ -18,8 +18,9 @@ class MailService:
     response = None
     destinationAddresses = None
     message = None
+    sender = None
 
-    def __init__(self, region='eu-central-1', channel_type='EMAIL',
+    def __init__(self, region='eu-central-1', channel_type='EMAIL', sender=None,
                  applicationId=None, aws_access=None, aws_secret=None):
         self.region = os.environ.get('REGION', region)
         self.applicationId = os.environ.get('PINPOINT_APPLICATION_ID', applicationId)
@@ -31,13 +32,16 @@ class MailService:
         self.aws_secret_access_key = os.environ.get('AWS_SECRET', aws_secret)
         if self.aws_secret_access_key is None:
             raise ValueError(ErrorCodes.AWS_SECRET_KEY_ERROR)
+        self.sender = os.environ.get('EMAIL_SENDER', sender)
+        if self.sender is None:
+            raise ValueError(ErrorCodes.MAIL_SENDER_ERROR)
         self.channel_type = os.environ.get('CHANNEL_TYPE', channel_type)
         self.is_mail_send = False
         self.error_message = ErrorCodes.MAIL_SEND_ERROR
         self.client = boto3.client('pinpoint', region_name=self.region, aws_access_key_id=self.aws_access_key_id,
                                    aws_secret_access_key=self.aws_secret_access_key)
 
-    def send(self, sender, to_addresses, message=None, template_name=None, template_version=None):
+    def send(self, to_addresses, message=None, template_name=None, template_version=None):
         try:
             self.destinationAddresses = to_addresses
             if self.destinationAddresses is None:
@@ -51,7 +55,7 @@ class MailService:
                     'ChannelType': 'EMAIL'
                 } for to_address in to_addresses
             }
-            self.message_configuration = {'EmailMessage': {'FromAddress': sender}}
+            self.message_configuration = {'EmailMessage': {'FromAddress': self.sender}}
             self.template_configuration = {
                 'EmailTemplate': {
                     'Name': template_name,
