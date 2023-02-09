@@ -1,3 +1,5 @@
+[![PyPI version](https://img.shields.io/pypi/v/PinPointClient.svg)](https://pypi.python.org/pypi/PinPointClient)
+
 # PinPointClient Python PyPackage
 
 PinPoint is Aws Sms Service. PinPointClient is a Python library to access services quickly.
