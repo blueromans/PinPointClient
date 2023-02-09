@@ -6,10 +6,10 @@ long_description = (this_directory / "README.md").read_text()
 
 setuptools.setup(
     name='PinPointClient',
-    version="0.0.5",
+    version="0.0.6",
     author="Yaşar Özyurt",
     author_email="blueromans@gmail.com",
-    description='PinPointSms Aws Pinpoint Ssm Client Python package',
+    description='PinPoint Aws Pinpoint SMS/Mail Client Python package',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/blueromans/PinPointClient.git',
