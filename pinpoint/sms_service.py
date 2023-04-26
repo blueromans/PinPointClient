@@ -53,6 +53,7 @@ class GsmService:
                                                       MessageRequest=self.message_request)
             self.is_sms_send = self.check_sms_status()
             if self.is_sms_send is False:
+                self.error_message = self.get_error_message()
                 raise PinPointException(self.error_message)
         except ClientError as e:
             raise PinPointException(e.response['Error']['Message'])
@@ -64,3 +65,6 @@ class GsmService:
                    self.destinationNumber] and \
                self.response['MessageResponse']['Result'][self.destinationNumber][
                    'DeliveryStatus'] == 'SUCCESSFUL'
+
+    def get_error_message(self):
+        return self.response['MessageResponse']['Result'][self.destinationNumber]['StatusMessage']

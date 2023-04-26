@@ -6,7 +6,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setuptools.setup(
     name='PinPointClient',
-    version="0.0.9",
+    version="0.0.10",
     author="Yaşar Özyurt",
     author_email="blueromans@gmail.com",
     description='PinPoint Aws Pinpoint SMS/Mail Client Python package',
